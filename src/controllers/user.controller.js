@@ -4,7 +4,6 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/user.model.js";
 import { uploadCloudinary } from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
 
 // access and refresh token
 const generateAccessAndRefereshTokens = async (userId) => {
@@ -83,8 +82,8 @@ const loginUser = asyncHandler(async (req, res) => {
   //send cookie
 
   const { email, username, password } = req.body;
-  console.log(email);
-  console.log(username);
+  // console.log(email);
+  // console.log(username);
 
   if (!username && !email) {
     throw new ApiError(400, "username or email is required");
