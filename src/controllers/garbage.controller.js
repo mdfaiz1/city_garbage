@@ -7,12 +7,13 @@ import { Garbage } from "../models/garbage.model.js";
 const submitComplain = asyncHandler(async (req, res) => {
   try {
     const { address, comment } = req.body;
+    console.log(req.body);
 
     if (!address) {
       throw new ApiError(400, "Address field required");
     }
 
-    const garbageImageLocal = req.files?.images[0]?.path;
+    const garbageImageLocal = req.files?.garbageImage[0]?.path;
     if (!garbageImageLocal) {
       throw new ApiError(404, "Garbage image is required");
     }
@@ -76,7 +77,7 @@ const deleteComplain = asyncHandler(async (req, res) => {
 const getAllComplains = asyncHandler(async (_, res) => {
   const allGarbageComplains = await Garbage.find({});
   if (!allGarbageComplains.length) {
-    throw new ApiError(404, "No complaints found");
+    throw new ApiResponse(200, "No complaints found");
   }
 
   return res
